@@ -1,1 +1,57 @@
-<p>Coming Soon!</p>
+<script src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
+<script>
+function resetMapImageMaxWidth() {
+	jQuery("#map img").css("max-width", "none");
+}
+
+jQuery(function($){
+	var mapLatLng = new google.maps.LatLng(32.822264, -97.055969);
+
+	var mapOptions = {
+		zoom: 14,
+		center: mapLatLng,
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	};
+
+	var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+	var marker = new google.maps.Marker({
+		position: mapLatLng,
+		title: "CEC Electrical Inc."
+	});
+
+	var contentString = '<div class="googlemaps-inline"><img src="wp-content/uploads/cec-logo-small.png" alt="CEC Electrical Inc."/><br />14450 Trinity Blvd. Suite 250<br />Fort Worth, TX 76155<br /><form action="http://maps.google.com/maps" method="get" target="_blank">Get Directions:<br /><input type="text" name="saddr" /><input type="hidden" name="daddr" value="14450 Trinity Blvd. Suite 250 Fort Worth, TX 76155" /><br /><input type="submit" value="get directions" /></form></div>';
+
+	var infoWindow = new google.maps.InfoWindow({
+		content: contentString
+	});
+
+	marker.setMap(map);
+
+	google.maps.event.addListener(marker, "click", function() {
+		infoWindow.open(map, marker);
+
+		setTimeout(resetMapImageMaxWidth, 50);
+	});
+});
+</script>
+<div id="contact-form">
+	This is where the contact form goes.
+</div>
+<div id="map"></div>
+<div id="contact-info">
+	<div id="contact-info-address">
+		CEC Electrical Inc.<br />
+		14450 Trinity Blvd. Suite 250<br />
+		Fort Worth, TX 76155
+	</div>
+	<div id="contact-info-phone">
+		<span class="contact-method">Phone:</span> <a href="tel:817-734-0040">817-734-0040</a>
+	</div>
+	<div id="contact-info-fax">
+		<span class="contact-method">Fax:</span> <a href="tel:817-354-4301">817-354-4301</a>
+	</div>
+	<div id="contact-info-email-address">
+		<span class="contact-method">Email:</span> <a href="mailto:info@cecelectricalinc.com">info@cecelectricalinc.com</a>
+	</div>
+</div>
