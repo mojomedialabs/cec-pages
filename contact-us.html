@@ -1,7 +1,7 @@
 <script src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
 <script>
 function resetMapImageMaxWidth() {
-	jQuery("#map img").css("max-width", "none");
+	jQuery(".map img").css("max-width", "none");
 }
 
 jQuery(function($){
@@ -10,10 +10,10 @@ jQuery(function($){
 	var mapOptions = {
 		zoom: 14,
 		center: mapLatLng,
-		mapTypeId: google.maps.MapTypeId.ROADMAP
+		mapTypeId: google.maps.MapTypeId.HYBRID
 	};
 
-	var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+	var mapFortWorth = new google.maps.Map(document.getElementById("map-fort-worth"), mapOptions);
 
 	var marker = new google.maps.Marker({
 		position: mapLatLng,
@@ -26,20 +26,49 @@ jQuery(function($){
 		content: contentString
 	});
 
-	marker.setMap(map);
+	marker.setMap(mapFortWorth);
 
 	google.maps.event.addListener(marker, "click", function() {
-		infoWindow.open(map, marker);
+		infoWindow.open(mapFortWorth, marker);
+
+		setTimeout(resetMapImageMaxWidth, 50);
+	});
+
+	mapLatLng = new google.maps.LatLng(30.247279, -97.736692);
+
+	mapOptions = {
+		zoom: 14,
+		center: mapLatLng,
+		mapTypeId: google.maps.MapTypeId.HYBRID
+	};
+
+	var mapAustin = new google.maps.Map(document.getElementById("map-austin"), mapOptions);
+
+	marker = new google.maps.Marker({
+		position: mapLatLng,
+		title: "CEC Electrical Inc."
+	});
+
+	contentString = '<div class="googlemaps-inline"><img src="wp-content/uploads/cec-logo-small.png" alt="CEC Electrical Inc."/><br />CEC Electrical Inc.<br />2550 South IH 35 Suite 205<br />Austin, Texas 78704<form action="http://maps.google.com/maps" method="get" target="_blank">Get Directions:<br /><input type="text" name="saddr" /><input type="hidden" name="daddr" value="14450 Trinity Blvd. Suite 250 Fort Worth, TX 76155" /><br /><input type="submit" value="get directions" /></form></div>';
+
+	infoWindow = new google.maps.InfoWindow({
+		content: contentString
+	});
+
+	marker.setMap(mapAustin);
+
+	google.maps.event.addListener(marker, "click", function() {
+		infoWindow.open(mapAustin, marker);
 
 		setTimeout(resetMapImageMaxWidth, 50);
 	});
 });
 </script>
 <div id="contact-form">
-	This is where the contact form goes.
+	[contact-form-7 id="515" title="Contact"]
 </div>
-<div id="map"></div>
-<div id="contact-info">
+<div id="map-fort-worth" class="map"></div>
+<div class="contact-info">
 	<div id="contact-info-address">
 		CEC Electrical Inc.<br />
 		14450 Trinity Blvd. Suite 250<br />
@@ -50,6 +79,23 @@ jQuery(function($){
 	</div>
 	<div id="contact-info-fax">
 		<span class="contact-method">Fax:</span> <a href="tel:817-354-4301">817-354-4301</a>
+	</div>
+	<div id="contact-info-email-address">
+		<span class="contact-method">Email:</span> <a href="mailto:info@cecelectricalinc.com">info@cecelectricalinc.com</a>
+	</div>
+</div>
+<div id="map-austin" class="map"></div>
+<div class="contact-info">
+	<div id="contact-info-address">
+		CEC Electrical Inc.<br />
+		2550 South IH 35 Suite 205<br />
+		Austin, Texas 78704
+	</div>
+	<div id="contact-info-phone">
+		<span class="contact-method">Phone:</span> <a href="tel:512-782-8111">512-782-8111</a>
+	</div>
+	<div id="contact-info-fax">
+		<span class="contact-method">Fax:</span> <a href="tel:512-462-0560">512-462-0560</a>
 	</div>
 	<div id="contact-info-email-address">
 		<span class="contact-method">Email:</span> <a href="mailto:info@cecelectricalinc.com">info@cecelectricalinc.com</a>
